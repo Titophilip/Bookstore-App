@@ -1,7 +1,7 @@
 const Book = require("../models/book.js");
 
 exports.createNewBook = (req, res) => {
-    let book = req.body
+    let book = req.body.book
     Book.create(book, (error, newBook) => {
         if (error) {
             return res.status(500).json({ message: error });
