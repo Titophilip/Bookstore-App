@@ -1,7 +1,7 @@
 const Book = require("../models/book.js");
 
 exports.createNewBook = (req, res) => {
-    let book = req.body.book
+    let book = req.body
     Book.create(book, (error, newBook) => {
         if (error) {
             return res.status(500).json({ message: error });
@@ -36,7 +36,7 @@ exports.fetchBook = (req, res) => {
 exports.updateBook = (req, res) => {
     let update = req.body;
     if (!update) {
-        return res.status(400).json({ message: "No details inputted."})
+        return res.status(400).json({ message: "No details inputed."})
     }
     Book.findByIdAndUpdate(req.params.id, update, (error, book) => {
         if (error) {
