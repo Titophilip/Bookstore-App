@@ -9,3 +9,9 @@ const bookSchema = new mongoose.Schema({
     imageURL: String,
     tags: Array
 })
+
+mongoose.set('useCreateIndex', true);
+
+const Book = mongoose.model("book", bookSchema);
+
+module.exports = Book;
