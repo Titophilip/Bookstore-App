@@ -44,7 +44,7 @@ exports.updateBook = (req, res) => {
         } else if (!book) {
             return res.status(404).json({ message: "Book not found. "});
         } else {    
-            Book.save((error, updatedBook) => {
+            book.save((error, updatedBook) => {
                 if (error) {
                     return res.status(500).json({ message: error });
                 } else {
