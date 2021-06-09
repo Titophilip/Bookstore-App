@@ -1,8 +1,22 @@
 const express = require("express");
-const app = express()
+const connectDB = require("./db");
+const bookRoutes = require("./routes/bookRoutes");
+require("dotenv").config();
 
+connectDB();
 
+const app = express();
 
-app.listen(4000, () => {
-    console.log("App up and running on port 4000.")
-})
+app.use(express.json());
+
+app.use(bookRoutes);
+
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "Welcome to The BookStore App!" });
+});
+
+const port = process.env.PORT || 5090;
+
+app.listen(port, () => {
+    console.log("App is up and running.");
+});

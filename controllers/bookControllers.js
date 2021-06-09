@@ -1,15 +1,8 @@
 const Book = require("../models/book.js");
 
 exports.createNewBook = (req, res) => {
-    Book.create({
-        title: req.body.title,
-        author: req.body.author,
-        description: req.body.description,
-        category: req.body.category,
-        purchaseCount: req.body.purchaseCount,
-        imageURL: req.body.imageURL,
-        tags: req.body.tags
-    }, (error, newBook) => {
+    let book = req.body
+    Book.create(book, (error, newBook) => {
         if (error) {
             return res.status(500).json({ message: error });
         } else {
