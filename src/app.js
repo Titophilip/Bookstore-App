@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
     res.status(200).json({ message: "Welcome to The BookStore App!" });
 });
 
-const port = process.env.PORT || 5090;
+const port = process.env.PORT || 5070;
 
 app.listen(port, () => {
     console.log("App is up and running.");
