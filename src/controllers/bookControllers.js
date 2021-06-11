@@ -12,7 +12,14 @@ exports.createNewBook = (req, res) => {
 };
 
 exports.fetchBooks = (req, res) => {
-    Book.find({}, (error, books) => {
+    let conditions = {}
+    if (req.query.category) {
+        conditions.category = req.query.category
+    }
+    if (req.query.author) {
+        conditions.author = req.query.author
+    }
+    Book.find(conditions, (error, books) => {
         if (error) {
             return res.status(500).json({ message: error });
         } else {
