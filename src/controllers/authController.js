@@ -9,7 +9,7 @@ exports.registerNewUser = (req, res) => {
         if (error) {
             return res.status(500).json({error})
         }
-        if (!notexistingUser) {
+        if (!existingUser) {
             return res.status(400).json({ message: "username already exists." })
         }
         User.create(...req.body, (error, newUser) => {
