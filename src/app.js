@@ -4,14 +4,14 @@ const bookRoutes = require("./routes/bookRoutes")
 const authRoutes = require("./routes/authRoutes");
 require("dotenv").config();
 
-connectDB();
-
 const app = express();
 
 app.use(express.json());
 
+connectDB();
+
 app.use(bookRoutes);
-app.use("/auth" ,authRoutes);
+app.use("/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.status(200).json({ message: "Welcome to The BookStore App!" });
