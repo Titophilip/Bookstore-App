@@ -15,13 +15,8 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowerCase: true
     },
-    password: {
-        type: String,
-        required: true
-    }
+    password: String
 })
-
-mongoose.set('useCreateIndex', true);
 
 const User = mongoose.model("user", userSchema);
 
