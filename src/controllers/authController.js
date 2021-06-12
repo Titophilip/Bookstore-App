@@ -12,8 +12,11 @@ exports.registerNewUser = (req, res) => {
         if (existingUser) {
             return res.status(400).json({ message: "username already exists." })
         }
-        let user = req.body
-        User.create(user, (error, newUser) => {
+        User.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userName: req.body.userName
+        }, (error, newUser) => {
             if (error) {
                 return res.status(500).json({error})
             }
