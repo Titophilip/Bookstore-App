@@ -24,7 +24,7 @@ exports.registerNewUser = (req, res) => {
                 if (error) {
                     return res.status(500).json({error})
                 }
-                bcrypt.hash(req.body.password, (error, hashedPassword) => {
+                bcrypt.hash(req.body.password, salt, (error, hashedPassword) => {
                     if (error) {
                         return res.status(500).json({error})
                     }
