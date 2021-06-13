@@ -5,7 +5,7 @@ const secret = "verySecurePASSWORD"
 const expiry = 3600
 
 exports.registerNewUser = (req, res) => {
-    User.findOne({ userName: req.body.username }, (error, existingUser) => {
+    User.findOne({ username: req.body.username }, (error, existingUser) => {
         if (error) {
             return res.status(500).json({error})
         }
@@ -15,7 +15,7 @@ exports.registerNewUser = (req, res) => {
         User.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            userName: req.body.userName
+            username: req.body.username
         }, (error, newUser) => {
             if (error) {
                 return res.status(500).json({error})
@@ -33,12 +33,13 @@ exports.registerNewUser = (req, res) => {
                         if (error) {
                             return res.status(500).json({error})
                         }
-                        jwt.sign({
-                            id: newUser._id,
-                            userName: newUser.userName,
-                            firstName: newUser.firstName,
-                            lastName: newUser.lastName
-                        }, secret, { expiresIn: expiry }, (error, token) => {
+                        jwt.sign(
+                            {
+                                id: newUser._id,
+                                username: newUser.username,
+                                firstName: newUser.firstName,
+                                lastName: newUser.lastName
+                            }, secret, { expiresIn: expiry }, (error, token) => {
                             if (error) {
                                 return res.status(500).json({error})
                             }
