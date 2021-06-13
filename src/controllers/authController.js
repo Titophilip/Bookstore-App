@@ -1,8 +1,9 @@
+require("dotenv").config()
 const User = require("../models/user")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const secret = "verySecurePASSWORD"
-const expiry = 3600
+const secret = process.env.SECRET
+const expiry = process.env.EXPIRY
 
 exports.registerNewUser = (req, res) => {
     User.findOne({ userName: req.body.userName }, (error, existingUser) => {
@@ -44,7 +45,7 @@ exports.registerNewUser = (req, res) => {
                                 return res.status(500).json({error})
                             }
                             return res.status(200).json({ 
-                                message: "User creation successful", 
+                                message: "User creation successful.", 
                                 token
                             })
                         })                        
@@ -72,10 +73,13 @@ exports.loginUser = (req, res) => {
             userName: foundUser.userName,
             firstName: foundUser.firstName,
             lastName: foundUser.lastName
-        }, secret, (error, token) => {
+        }, secret, {
+            expiresIn: expiry
+        }, (error, token) => {
             if (error) {
-                return res.status(500).json({ error})
+                return res.status(500).json({ error })
             }
+            return res.status(200).json({ message: "User logged in.", token })
         })
     })
 }
