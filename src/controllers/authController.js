@@ -58,11 +58,13 @@ exports.registerNewUser = (req, res) => {
 exports.loginUser = (req, res) => {
     User.findOne({ userName: req.body.userName }, (error, foundUser) => {
         if (error) {
-            console.error(message)
             return res.status(500).json({ error })
         }
         if (!foundUser) {
             return res.status(401).json({ message: "Incorrect username." })
+        }
+        else {
+            return res.status(200).json({ foundUser })
         }
     })
 }
