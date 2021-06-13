@@ -64,6 +64,18 @@ exports.loginUser = (req, res) => {
             return res.status(401).json({ message: "Incorrect username." })
         }
         let match = bcrypt.compareSync(req.body.password, foundUser.password)
-        return res.json({ match })
+        if (!match) {
+            return res.status(401).json({ message: "Incorrect password." })
+        }
+        jwt.sign({
+            id: foundUser._id,
+            userName: foundUser.userName,
+            firstName: foundUser.firstName,
+            lastName: foundUser.lastName
+        }, secret, (error, token) => {
+            if (error) {
+                return res.status(500).json({ error})
+            }
+        })
     })
 }
