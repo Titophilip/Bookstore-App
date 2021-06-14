@@ -6,7 +6,7 @@ const { authenticateUser } = require("../middlewares/authentication");
 
 
 bookRouter.get("/books", authenticateUser, bookController.fetchBooks);
-bookRouter.get("/books/:id", bookController.fetchBook);
+bookRouter.get("/books/:id", authenticateUser, bookController.fetchBook);
 bookRouter.post("/books", bookController.createNewBook);
 bookRouter.put("/books/:id", bookController.updateBook);
 bookRouter.delete("/books/:id", bookController.deleteBook);
