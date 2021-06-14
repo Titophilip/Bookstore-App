@@ -3,7 +3,7 @@ const User = require("../models/user")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const secret = process.env.SECRET
-const expiry = parselnt(process.env.EXPIRY)
+const expiry = process.env.EXPIRY
 
 exports.registerNewUser = (req, res) => {
     User.findOne({ userName: req.body.userName }, (error, existingUser) => {
@@ -40,7 +40,7 @@ exports.registerNewUser = (req, res) => {
                                 userName: newUser.userName,
                                 firstName: newUser.firstName,
                                 lastName: newUser.lastName
-                            }, secret, { expiresIn: expiry }, (error, token) => {
+                            }, secret, { expiresIn: parselnt(expiry) }, (error, token) => {
                             if (error) {
                                 return res.status(500).json({error})
                             }
