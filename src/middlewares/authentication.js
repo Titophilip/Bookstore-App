@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const secret = process.env.SECRET
+const secret = parselnt("process.env.SECRET")
 
 exports.authenticateUser =(req, res, next) => {
     if (!req.headers.authorization) {
