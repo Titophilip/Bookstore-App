@@ -18,3 +18,13 @@ exports.createToken = async (user) => {
         return null;
     }
 }
+
+exports.decodeToken = async (token) => {
+    try {
+        let decodedTOKEN = jwt.verify(token, secret)
+        return decodedTOKEN
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
