@@ -1,7 +1,8 @@
 const express = require("express");
-const connectDB = require("./db");
+const connectDB = require("./db/setup");
 const bookRoutes = require("./routes/bookRoutes")
 const authRoutes = require("./routes/authRoutes");
+const { seedAdmin } = require("./seeders/admin")
 require("dotenv").config();
 
 const app = express();
