@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken")
 const secret = process.env.SECRET
+const { decodeToken } = require("../services/jwtService")
 
 exports.authenticateUser =(req, res, next) => {
     if (!req.headers.authorization) {
@@ -12,16 +13,13 @@ exports.authenticateUser =(req, res, next) => {
     }
     let token = splittedHeader[1];
 
-    jwt.verify(token, secret, (error, decodedToken) => {
-        if (error) {
-            return res.status(500).json({ error })
-        }
-        if (!decodedToken) {
-            return res.status(401).json({ message: "Invalid authorization token. Please login." })
-        }
+    let decodedToken = decodeToken(token)
+    if (!decodedToken) {
+        return res.status(401).json({ message: "Invalid authorization token. Please login." })
+    } else {
         req.user = decodedToken
         next();
-    })
+    }
 }
 
 exports.checkIfAdmin = (req, res, error) => {
