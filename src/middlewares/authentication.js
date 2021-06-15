@@ -20,5 +20,5 @@ exports.authenticateUser =(req, res, next) => {
             return res.status(401).json({ message: "Invalid authorization token. Please login" })
         }
     })
-    next()
+    next();
 }
