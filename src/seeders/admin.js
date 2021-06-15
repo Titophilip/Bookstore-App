@@ -1,7 +1,7 @@
   const User = require("../models/user");
-  const bcrypt = require("bcryptjs")
+  const bcrypt = require("bcryptjs");
   require("dotenv").config();
-  password = process.env.PASSWORD
+  const password = process.env.PASSWORD;
 
   exports.seedAdmin = () => {
       User.findOne({ role: "admin" }, (error, admin) => {

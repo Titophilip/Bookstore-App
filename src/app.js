@@ -4,7 +4,8 @@ const connectDB = require("./db/setup");
 const bookRoutes = require("./routes/bookRoutes")
 const authRoutes = require("./routes/authRoutes");
 
-// const { seedAdmin } = require("./seeders/admin")
+const { seedAdmin } = require("./seeders/admin")
+seedAdmin()
 require("dotenv").config();
 
 const app = express();

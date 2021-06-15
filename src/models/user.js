@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         enum: ["regular", "admin"],
         default: "regular"
     }
-})
+});
 
 const User = mongoose.model("user", userSchema);
 
