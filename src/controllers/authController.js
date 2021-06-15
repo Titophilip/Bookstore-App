@@ -39,7 +39,6 @@ exports.registerNewUser = (req, res) => {
                         return res.status(200).json({ 
                             message: "User creation successful.", 
                             token
-                            })
                         })                        
                     })
                 })
@@ -54,25 +53,16 @@ exports.loginUser = (req, res) => {
             return res.status(500).json({ error })
         }
         if (!foundUser) {
-            return res.status(401).json({ message: "Incorrect username." })
+            return res.status(401).json({ message: "Incorrect username/password." })
         }
         let match = bcrypt.compareSync(req.body.password, foundUser.password)
         if (!match) {
-            return res.status(401).json({ message: "Incorrect password." })
+            return res.status(401).json({ message: "Incorrect username/password." })
         }
-        jwt.sign({
-            id: foundUser._id,
-            userName: foundUser.userName,
-            firstName: foundUser.firstName,
-            lastName: foundUser.lastName,
-            role: foundUser.role
-        }, secret, {
-            expiresIn: expiry
-        }, (error, token) => {
-            if (error) {
-                return res.status(500).json({ error })
-            }
-            return res.status(200).json({ message: "User logged in.", token })
-        })
+        let token = createToken(foundUser)
+        if (!token) {
+            return res.status(500).json({ message: "Sorry, we could not authenticate you. Please try again." })
+        }
+        return res.status(200).json({ message: "User logged in.", token })
     })
 }
