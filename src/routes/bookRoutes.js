@@ -1,8 +1,7 @@
 const express = require("express")
 const bookRouter = express.Router()
 const bookController = require("../controllers/bookControllers");
-const { authenticateUser } = require("../middlewares/authentication");
-const { checkIfAdmin } = require("../middlewares/authentication");
+const { authenticateUser, checkIfAdmin } = require("../middlewares/authentication");
 
 
 bookRouter.get("/books", authenticateUser, bookController.fetchBooks);
