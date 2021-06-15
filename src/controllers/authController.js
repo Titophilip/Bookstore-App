@@ -1,9 +1,7 @@
 require("dotenv").config()
 const User = require("../models/user")
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-const secret = process.env.SECRET
-const expiry = Number(process.env.EXPIRY)
+const { createToken } = require("../services/jwtService")
 
 exports.registerNewUser = (req, res) => {
     User.findOne({ userName: req.body.userName }, (error, existingUser) => {
@@ -34,20 +32,13 @@ exports.registerNewUser = (req, res) => {
                         if (error) {
                             return res.status(500).json({error})
                         }
-                        jwt.sign(
-                            {
-                                id: newUser._id,
-                                userName: newUser.userName,
-                                firstName: newUser.firstName,
-                                lastName: newUser.lastName,
-                                role: newUser.role
-                            }, secret, { expiresIn: parselnt(expiry) }, (error, token) => {
-                            if (error) {
-                                return res.status(500).json({error})
-                            }
-                            return res.status(200).json({ 
-                                message: "User creation successful.", 
-                                token
+                        let token = createToken(newUser)
+                        if (!token) {
+                            return res.status(500).json({ message: "Sorry, we could not authenticate you." })
+                        }
+                        return res.status(200).json({ 
+                            message: "User creation successful.", 
+                            token
                             })
                         })                        
                     })
