@@ -19,6 +19,14 @@ exports.authenticateUser =(req, res, next) => {
         if (!decodedToken) {
             return res.status(401).json({ message: "Invalid authorization token. Please login." })
         }
+        req.user = decodedToken
         next();
     })
+}
+
+exports.checkIfAdmin = (req, res, error) => {
+    if (req.user.role !== "admin") {
+        return res.status(401).json({ message: "You are not authorised to perform this action." })
+    }
+    next();
 }
