@@ -39,7 +39,8 @@ exports.registerNewUser = (req, res) => {
                                 id: newUser._id,
                                 userName: newUser.userName,
                                 firstName: newUser.firstName,
-                                lastName: newUser.lastName
+                                lastName: newUser.lastName,
+                                role: newUser.role
                             }, secret, { expiresIn: parselnt(expiry) }, (error, token) => {
                             if (error) {
                                 return res.status(500).json({error})
@@ -72,7 +73,8 @@ exports.loginUser = (req, res) => {
             id: foundUser._id,
             userName: foundUser.userName,
             firstName: foundUser.firstName,
-            lastName: foundUser.lastName
+            lastName: foundUser.lastName,
+            role: foundUser.role
         }, secret, {
             expiresIn: expiry
         }, (error, token) => {
