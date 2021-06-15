@@ -14,14 +14,14 @@
               lastName: "Goblin",
               userName: "bookgoblin",
               role: "admin"
-          }, (error, user) => {
+          }, (error, adminUser) => {
               if (error) throw error;
               bcrypt.genSalt(10, (error, salt) => {
                   if (error) throw error;
                   bcrypt.hash(password, salt, (error, hash) => {
                       if (error) throw error;
-                      user.password = hash;
-                      user.save((error, savedUser) => {
+                      adminUser.password = hash;
+                      adminUser.save((error, savedUser) => {
                           if (error) throw error;
                           return "Admin account created."
                       })
