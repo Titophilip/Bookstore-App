@@ -1,4 +1,5 @@
   const User = require("../models/user");
+  const bcrypt = require("bcryptjs")
 
   exports.seedAdmin = () => {
       User.findOne({ role: "admin" }, (error, admin) => {
@@ -10,7 +11,14 @@
           }
           User.create({
               firstName: "Book",
-              las
+              lastName: "Goblin",
+              userName: "bookgoblin",
+              role: "admin"
+          }, (error, user) => {
+              if (error) {
+                  throw error
+              }
+              bcrypt.genSalt(10, salt,)
           })
       })
   }
