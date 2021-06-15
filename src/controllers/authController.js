@@ -3,7 +3,7 @@ const User = require("../models/user")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const secret = process.env.SECRET
-const expiry = process.env.EXPIRY
+const expiry = Number(process.env.EXPIRY)
 
 exports.registerNewUser = (req, res) => {
     User.findOne({ userName: req.body.userName }, (error, existingUser) => {

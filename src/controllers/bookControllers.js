@@ -20,7 +20,6 @@ exports.fetchBooks = (req, res) => {
     }
     Book.find(conditions, (error, books) => {
         if (error) {
-            console.log(error)
             return res.status(500).json({ message: error });
         } else {
             return res.status(200).json({ message: "Books Found.", books });
