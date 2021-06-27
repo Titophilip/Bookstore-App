@@ -6,7 +6,7 @@ const expiry = Number(process.env.EXPIRY)
 
 exports.createToken = (user) => {
     try {
-        jwt.sign(
+        let token = jwt.sign(
             {
                 id: user._id,
                 userName: user.userName,

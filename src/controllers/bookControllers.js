@@ -25,6 +25,7 @@ exports.fetchBooks = (req, res) => {
         if (error) {
             return res.status(500).json({ message: error });
         } else {
+            console.log(books)
             return res.status(200).json({ message: "Books Found.", books });
         }
     });
