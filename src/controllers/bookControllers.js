@@ -18,6 +18,9 @@ exports.fetchBooks = (req, res) => {
     if (req.query.author) {
         conditions.author = req.query.author
     }
+    if (req.query.tag) {
+        conditions.tag = req.query.tag
+    }
     Book.find(conditions, (error, books) => {
         if (error) {
             return res.status(500).json({ message: error });
