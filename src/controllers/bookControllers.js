@@ -25,8 +25,11 @@ exports.fetchBooks = (req, res) => {
         if (error) {
             return res.status(500).json({ message: error });
         } else {
-            console.log(books)
-            for boo
+            for (const book of books) {
+                if ("#fantasy" in book.tags) {
+                    console.log(book)
+                }
+            }
             return res.status(200).json({ message: "Books Found.", books });
         }
     });
