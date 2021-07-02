@@ -26,7 +26,7 @@ exports.fetchBooks = (req, res) => {
             return res.status(500).json({ message: error });
         } else {
             for (const book of books) {
-                if ("#fantasy" in book.tags) {
+                if (book.tags.includes(`#${req.query.tag}`)) {
                     console.log(book)
                 }
             }
