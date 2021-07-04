@@ -24,6 +24,7 @@ exports.createToken = (user) => {
 exports.decodeToken = (token) => {
     try {
         let decodedTOKEN = jwt.verify(token, secret)
+        console.log(decodedTOKEN)
         return decodedTOKEN
     } catch (error) {
         console.log(error);
