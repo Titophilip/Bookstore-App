@@ -1,0 +1,9 @@
+openapi: 3.0.0
+info:
+  title: company goals plugin
+  version: current
+servers:
+- url: https://virtserver.swaggerhub.com/Tito-Ebeniro/company-goals-zuri.chat/current
+  description: SwaggerHub API Auto Mocking
+paths: {}
+components: {}
