@@ -5,7 +5,7 @@ const bookRoutes = require("./routes/bookRoutes")
 const authRoutes = require("./routes/authRoutes");
 
 const { seedAdmin } = require("./seeders/admin")
-// seedAdmin()
+seedAdmin()
 
 require("dotenv").config();
 

@@ -17,6 +17,7 @@ exports.registerNewUser = (req, res) => {
             userName: req.body.userName
         }, (error, newUser) => {
             if (error) {
+                console.log(error)
                 return res.status(500).json({error})
             }
             bcrypt.genSalt(10, (error, salt) => {

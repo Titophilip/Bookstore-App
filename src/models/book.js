@@ -20,10 +20,7 @@ const bookSchema = new mongoose.Schema({
 
     purchaseCount: Number,
 
-    imageURL: {
-        type: String,
-        required: true
-    },
+    imageURL: String,
 
     tags: Array
 })

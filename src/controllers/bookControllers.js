@@ -52,7 +52,7 @@ exports.updateBook = (req, res) => {
     if (!update) {
         return res.status(400).json({ message: "No details inputed."})
     }
-    Book.findByIdAndUpdate(req.params.id, ...update, (error, book) => {
+    Book.findByIdAndUpdate(req.params.id, update, (error, book) => {
         if (error) {
             return res.status(500).json({ message: error });
         } else if (!book) {

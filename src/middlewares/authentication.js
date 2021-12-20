@@ -22,7 +22,7 @@ exports.authenticateUser =(req, res, next) => {
     }
 }
 
-exports.checkIfAdmin = (req, res, error) => {
+exports.checkIfAdmin = (req, res, next) => {
     if (req.user.role !== "admin") {
         return res.status(401).json({ message: "You are not authorised to perform this action." })
     }
