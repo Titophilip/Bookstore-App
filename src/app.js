@@ -15,8 +15,8 @@ app.use(express.json());
 
 connectDB();
 
-app.use(bookRoutes);
-app.use("/auth", authRoutes);
+app.use("/api/v1/books", bookRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.status(200).json({ message: "Welcome to The BookStore App!" });
